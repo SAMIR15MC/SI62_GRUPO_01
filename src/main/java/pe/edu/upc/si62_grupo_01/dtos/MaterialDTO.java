@@ -8,6 +8,8 @@ public class MaterialDTO {
     private String tipoMaterial;
     private float costoMaterial;
     private float cantidadMaterial;
+    private String cosas;
+    private String ruebas;
 
     public int getIdMaterial() {return idMaterial;}
     public void setIdMaterial(int idMaterial) {this.idMaterial = idMaterial;}
