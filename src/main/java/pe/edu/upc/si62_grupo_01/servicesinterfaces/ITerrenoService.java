@@ -9,4 +9,5 @@ public interface ITerrenoService {
     public void insert(Terreno terreno);
     public void delete(int id);
     public void update(Terreno terreno);
+    public  List<String[]>CantidadUsuarios();
 }

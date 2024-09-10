@@ -4,9 +4,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.si62_grupo_01.dtos.TerrenoDTO;
+import pe.edu.upc.si62_grupo_01.dtos.UsuariosTerrenoDTO;
 import pe.edu.upc.si62_grupo_01.entities.Terreno;
 import pe.edu.upc.si62_grupo_01.servicesinterfaces.ITerrenoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,5 +41,18 @@ public class TerrenoController {
     @DeleteMapping
     public void eliminar(@PathVariable ("id")Integer id){
         terrenoService.delete(id);
+    }
+
+    @GetMapping("/cantidades_usuarios")
+    public List<UsuariosTerrenoDTO>cantidadUsuariosTerreno(){
+        List<String[]>lista=terrenoService.CantidadUsuarios();
+        List<UsuariosTerrenoDTO>listaDTO=new ArrayList<>();
+        for(String[] columna:lista){
+            UsuariosTerrenoDTO dto=new UsuariosTerrenoDTO();
+            dto.setUbicacionTerreno(columna[0]);
+            dto.setCantidadUsuarios(Integer.parseInt(columna[1]));
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 }
