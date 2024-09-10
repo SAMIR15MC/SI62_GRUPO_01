@@ -3,17 +3,17 @@ package pe.edu.upc.si62_grupo_01.dtos;
 import pe.edu.upc.si62_grupo_01.entities.Rol;
 
 public class UsuarioDTO {
-    private int idUsuario;
+    private Long idUsuario;
     private String nombreCompleto;
-    private String email;
     private String contrasenia;
+    private Boolean enabled;
     private Rol role;
 
-    public int getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -25,20 +25,20 @@ public class UsuarioDTO {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getContrasenia() {
         return contrasenia;
     }
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Rol getRole() {
