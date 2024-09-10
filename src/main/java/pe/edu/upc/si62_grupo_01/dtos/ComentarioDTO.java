@@ -13,6 +13,7 @@ public class ComentarioDTO {
     private Usuario usuario;
     private Proyecto proyecto;
     private Evaluacion evaluacion;
+    // listar comentarios por proyecto por fecha
 
     public int getIdComentario() {
         return idComentario;
