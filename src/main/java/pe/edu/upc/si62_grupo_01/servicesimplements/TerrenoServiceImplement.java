@@ -30,4 +30,9 @@ public class TerrenoServiceImplement implements ITerrenoService {
     public void update(Terreno terreno) {
         terrenoRepository.save(terreno);
     }
+
+    @Override
+    public List<String[]> CantidadUsuarios() {
+        return terrenoRepository.cantidad();
+    }
 }

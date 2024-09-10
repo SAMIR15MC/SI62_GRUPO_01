@@ -1,5 +1,6 @@
 package pe.edu.upc.si62_grupo_01.dtos;
 
+import pe.edu.upc.si62_grupo_01.entities.Terreno;
 import pe.edu.upc.si62_grupo_01.entities.Usuario;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ public class ProyectoDTO {
     private LocalDate fechaCreacionProyecto;
     private String estadoProyecto;
     private Usuario usuarioProyecto;
+    private Terreno terrenoProyecto;
 
     public int getIdProyecto() {
         return idProyecto;
@@ -59,4 +61,6 @@ public class ProyectoDTO {
     public void setUsuarioProyecto(Usuario usuarioProyecto) {
         this.usuarioProyecto = usuarioProyecto;
     }
+    public  Terreno getTerrenoProyecto(){return terrenoProyecto;}
+    public void setTerrenoProyecto(Terreno terrenoProyecto){this.terrenoProyecto=terrenoProyecto;}
 }

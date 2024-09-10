@@ -21,17 +21,21 @@ public class Proyecto {
     @ManyToOne
     @JoinColumn(name="idUsuario")
     private Usuario usuarioProyecto;
+    @OneToOne
+    @JoinColumn(name="idTerreno")
+    private Terreno terrenoProyecto;
 
     public Proyecto() {
     }
 
-    public Proyecto(int idProyecto, String nombreProyecto, String descripcionProyecto, LocalDate fechaCreacionProyecto, String estadoProyecto, Usuario usuarioProyecto) {
+    public Proyecto(int idProyecto, String nombreProyecto, String descripcionProyecto, LocalDate fechaCreacionProyecto, String estadoProyecto, Usuario usuarioProyecto,Terreno terrenoProyecto) {
         this.idProyecto = idProyecto;
         this.nombreProyecto = nombreProyecto;
         this.descripcionProyecto = descripcionProyecto;
         this.fechaCreacionProyecto = fechaCreacionProyecto;
         this.estadoProyecto = estadoProyecto;
         this.usuarioProyecto = usuarioProyecto;
+        this.terrenoProyecto= terrenoProyecto;
     }
 
     public int getIdProyecto() {
@@ -81,4 +85,6 @@ public class Proyecto {
     public void setUsuarioProyecto(Usuario usuarioProyecto) {
         this.usuarioProyecto = usuarioProyecto;
     }
+    public Terreno getTerrenoProyecto(){return terrenoProyecto;}
+    public void setTerrenoProyecto(Terreno terrenoProyecto){this.terrenoProyecto=terrenoProyecto;}
 }
