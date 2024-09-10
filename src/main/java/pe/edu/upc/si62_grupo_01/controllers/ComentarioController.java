@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/hola")
+@RequestMapping("/comentario")
 public class ComentarioController {
     @Autowired
     private IComentarioService comentarioService;
