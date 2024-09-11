@@ -11,16 +11,16 @@ import pe.edu.upc.si62_grupo_01.entities.Usuario;
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    // Cambié 'username' a 'nombreCompleto' para alinearlo con tu entidad
+    // Cambiar para buscar por nombreCompleto
     public Usuario findOneByNombreCompleto(String nombreCompleto);
 
-    // BUSCAR POR NOMBRE COMPLETO
+    // Buscar cantidad de usuarios por nombre de usuario
     @Query("select count(u.nombreCompleto) from Usuario u where u.nombreCompleto = :nombreCompleto")
-    public int buscarNombreCompleto(@Param("nombreCompleto") String nombreCompleto);
+    public int buscarUsername(@Param("nombreCompleto") String nombreCompleto);
 
-    // INSERTAR ROLES
+    // Insertar roles
     @Transactional
     @Modifying
-    @Query(value = "insert into roles (rol, user_id) VALUES (:rol, :user_id)", nativeQuery = true)
-    public void insRol(@Param("rol") String authority, @Param("user_id") Long user_id);
+    @Query(value = "INSERT INTO roles (nombre_rol, user_id) VALUES (:nombreRol, :userId)", nativeQuery = true)
+    public void insRol(@Param("nombreRol") String nombreRol, @Param("userId") Long userId);
 }

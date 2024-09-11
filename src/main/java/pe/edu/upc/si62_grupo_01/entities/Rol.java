@@ -1,27 +1,25 @@
 package pe.edu.upc.si62_grupo_01.entities;
 
 import jakarta.persistence.*;
-@Entity
-@Table(name="Rol")
 
+@Entity
+@Table(name = "Rol")
 public class Rol {
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRol;
-    @Column(name="nombreRol",nullable = false,length = 100)
+
+    @Column(name = "nombreRol", nullable = false, length = 100)
     private String nombreRol;
-    @Column(name="descripcionRol",nullable = false,length = 200)
+
+    @Column(name = "descripcionRol", nullable = false, length = 200)
     private String descripcionRol;
 
-    public Rol() {
+    // Relación ManyToOne con Usuario
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Usuario usuario;
 
-    }
-    public Rol(int idRol,String nombreRol, String descripcionRol) {
-        this.idRol = idRol;
-        this.nombreRol = nombreRol;
-        this.descripcionRol = descripcionRol;
-
-    }
 
     public int getIdRol() {
         return idRol;
@@ -45,5 +43,13 @@ public class Rol {
 
     public void setDescripcionRol(String descripcionRol) {
         this.descripcionRol = descripcionRol;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

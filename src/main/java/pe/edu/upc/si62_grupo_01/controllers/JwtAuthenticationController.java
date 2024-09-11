@@ -19,19 +19,23 @@ import pe.edu.upc.si62_grupo_01.servicesimplements.JwtUserDetailsService;
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
+
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest req) throws Exception {
-        authenticate(req.getUsername(), req.getPassword());
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
+    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest authenticationRequest) throws Exception {
+        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
+
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
@@ -43,7 +47,5 @@ public class JwtAuthenticationController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
-
-
     }
 }

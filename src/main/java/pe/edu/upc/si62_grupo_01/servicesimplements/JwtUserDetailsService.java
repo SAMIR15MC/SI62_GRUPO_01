@@ -15,36 +15,36 @@ import java.util.List;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
+
     @Autowired
-    private IUsuarioRepository repo;
+    private IUsuarioRepository usuarioRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Buscar al usuario por su nombre de usuario
-        Usuario user = repo.findOneByNombreCompleto(username);
+    public UserDetails loadUserByUsername(String nombreCompleto) throws UsernameNotFoundException {
+        // Cambiar la búsqueda de 'username' a 'nombreCompleto'
+        Usuario usuario = usuarioRepository.findOneByNombreCompleto(nombreCompleto);
 
-        // Si el usuario no existe, lanzar excepción
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("User not exists: %s", username));
+        if (usuario == null) {
+            throw new UsernameNotFoundException(String.format("Usuario no existe: %s", nombreCompleto));
         }
 
-        // Crear la lista de roles (GrantedAuthority), en este caso solo un rol
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole().getNombreRol()));
+        // Obtener roles y autoridades
+        List<GrantedAuthority> roles = new ArrayList<>();
+        usuario.getRoles().forEach(rol -> {
+            roles.add(new SimpleGrantedAuthority(rol.getNombreRol()));
+        });
 
-        // Crear el objeto UserDetails y almacenarlo en la variable "ud"
+        // Crear y retornar el objeto UserDetails
         UserDetails ud = new org.springframework.security.core.userdetails.User(
-                user.getNombreCompleto(), // El nombre completo del usuario
-                user.getContrasenia(),    // La contraseña
-                user.getEnabled(),        // Si el usuario está habilitado
-                true,                     // Cuenta no expirada
-                true,                     // Credenciales no expiradas
-                true,                     // Cuenta no bloqueada
-                authorities               // Lista de roles (GrantedAuthority)
+                usuario.getNombreCompleto(),
+                usuario.getContrasenia(),
+                usuario.getEnabled(),
+                true, // accountNonExpired
+                true, // credentialsNonExpired
+                true, // accountNonLocked
+                roles
         );
 
-        // Devolver el objeto ud
         return ud;
     }
 }
-

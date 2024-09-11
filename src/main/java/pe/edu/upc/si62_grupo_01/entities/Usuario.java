@@ -1,35 +1,38 @@
 package pe.edu.upc.si62_grupo_01.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario; // Cambiado de int a Long
+    private Long idUsuario;
 
     @Column(name = "nombreCompleto", nullable = false, length = 100)
     private String nombreCompleto;
 
-    private Boolean enabled;
-
     @Column(name = "contrasenia", nullable = false, length = 100)
     private String contrasenia;
 
-    @ManyToOne
-    @JoinColumn(name = "idRol")
-    private Rol role;
+    private Boolean enabled;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Rol> roles;
 
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String nombreCompleto, Boolean enabled, String contrasenia, Rol role) {
+    public Usuario(Long idUsuario, String nombreCompleto, Boolean enabled, String contrasenia) {
         this.idUsuario = idUsuario;
         this.nombreCompleto = nombreCompleto;
         this.enabled = enabled;
         this.contrasenia = contrasenia;
-        this.role = role;
     }
 
     public Long getIdUsuario() {
@@ -48,14 +51,6 @@ public class Usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public String getContrasenia() {
         return contrasenia;
     }
@@ -64,11 +59,19 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public Rol getRole() {
-        return role;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setRole(Rol role) {
-        this.role = role;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 }

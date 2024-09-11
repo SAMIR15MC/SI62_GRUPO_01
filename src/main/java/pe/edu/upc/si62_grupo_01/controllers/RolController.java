@@ -13,31 +13,38 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/rol")
 public class RolController {
+
     @Autowired
     private IRolService rolService;
 
+    // Método GET para listar todos los roles
     @GetMapping
     public List<RolDTO> listar() {
-        return rolService.list().stream().map(x->{
-            ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(x,RolDTO.class);
+        return rolService.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, RolDTO.class);
         }).collect(Collectors.toList());
     }
+
+    // Método POST para registrar un nuevo rol
     @PostMapping
-    private void insertar(@RequestBody RolDTO rolDTO) {
-        ModelMapper m=new ModelMapper();
-        Rol r=m.map(rolDTO,Rol.class);
-        rolService.insert(r);
+    public void registrar(@RequestBody RolDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Rol rol = m.map(dto, Rol.class);
+        rolService.insert(rol);
     }
-    @PutMapping()
-    public void modificar(@RequestBody RolDTO rolDTO) {
-        ModelMapper m= new ModelMapper();
-        Rol d=m.map(rolDTO,Rol.class);
-        rolService.update(d);
+
+    // Método PUT para modificar un rol existente
+    @PutMapping
+    public void modificar(@RequestBody RolDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Rol rol = m.map(dto, Rol.class);
+        rolService.update(rol);
     }
-    @DeleteMapping
-    public void eliminar(@PathVariable("id") Integer id)
-    {
+
+    // Método DELETE para eliminar un rol por ID
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") Integer id) {
         rolService.delete(id);
     }
 }
