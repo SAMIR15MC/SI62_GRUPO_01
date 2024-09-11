@@ -3,6 +3,7 @@ package pe.edu.upc.si62_grupo_01.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.si62_grupo_01.dtos.ProyectoCountDTO;
 import pe.edu.upc.si62_grupo_01.dtos.ProyectoDTO;
 import pe.edu.upc.si62_grupo_01.entities.Proyecto;
 import pe.edu.upc.si62_grupo_01.servicesinterfaces.IProyectoService;
@@ -38,5 +39,10 @@ public class ProyectoController {
     @DeleteMapping
     public void elimina(@PathVariable ("id") Integer id){
         proyectoService.delete(id);
+    }
+
+    @GetMapping("/contar-por-usuario/{idUsuario}")
+    public List<ProyectoCountDTO> contarProyectosPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        return proyectoService.contarProyectosPorUsuario(idUsuario);
     }
 }

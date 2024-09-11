@@ -6,6 +6,8 @@ public class UsuarioDTO {
     private String contrasenia;
     private Boolean enabled;
 
+
+
     public Long getIdUsuario() {
         return idUsuario;
     }

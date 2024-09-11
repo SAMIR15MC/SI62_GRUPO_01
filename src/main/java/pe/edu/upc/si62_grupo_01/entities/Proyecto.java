@@ -3,6 +3,7 @@ package pe.edu.upc.si62_grupo_01.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Proyecto")
@@ -21,17 +22,19 @@ public class Proyecto {
     @ManyToOne
     @JoinColumn(name="idUsuario")
     private Usuario usuarioProyecto;
-
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comentario> comentarios;
     public Proyecto() {
     }
 
-    public Proyecto(int idProyecto, String nombreProyecto, String descripcionProyecto, LocalDate fechaCreacionProyecto, String estadoProyecto, Usuario usuarioProyecto) {
+    public Proyecto(int idProyecto, String nombreProyecto, String descripcionProyecto, LocalDate fechaCreacionProyecto, String estadoProyecto, Usuario usuarioProyecto, List<Comentario> comentarios) {
         this.idProyecto = idProyecto;
         this.nombreProyecto = nombreProyecto;
         this.descripcionProyecto = descripcionProyecto;
         this.fechaCreacionProyecto = fechaCreacionProyecto;
         this.estadoProyecto = estadoProyecto;
         this.usuarioProyecto = usuarioProyecto;
+        this.comentarios = comentarios;
     }
 
     public int getIdProyecto() {
@@ -80,5 +83,13 @@ public class Proyecto {
 
     public void setUsuarioProyecto(Usuario usuarioProyecto) {
         this.usuarioProyecto = usuarioProyecto;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }

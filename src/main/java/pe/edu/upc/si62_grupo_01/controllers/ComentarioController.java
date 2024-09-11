@@ -3,6 +3,7 @@ package pe.edu.upc.si62_grupo_01.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.si62_grupo_01.dtos.ComentarioCountDTO;
 import pe.edu.upc.si62_grupo_01.dtos.ComentarioDTO;
 import pe.edu.upc.si62_grupo_01.dtos.EvaluacionDTO;
 import pe.edu.upc.si62_grupo_01.entities.Comentario;
@@ -44,6 +45,11 @@ public class ComentarioController {
     @DeleteMapping
     public void eliminar(@PathVariable("id") Integer id) {
         comentarioService.delete(id);
+    }
+
+    @GetMapping("/contar-por-usuario/{idUsuario}")
+    public List<ComentarioCountDTO> contarComentariosPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        return comentarioService.contarComentariosPorUsuario(idUsuario);
     }
 
 }

@@ -10,9 +10,11 @@ public class ComentarioDTO {
     private int idComentario;
     private String contenidoComentario;
     private LocalDate fechaComentario;
-    private Usuario usuario;
-    private Proyecto proyecto;
-    private Evaluacion evaluacion;
+    private Usuario usuario;         // Relación con Usuario
+    private Proyecto proyecto;       // Relación con Proyecto
+    private Evaluacion evaluacion;   // Relación con Evaluación
+
+
 
     public int getIdComentario() {
         return idComentario;

@@ -19,6 +19,12 @@ public class Usuario {
     private String contrasenia;
 
     private Boolean enabled;
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Proyecto> proyectos;
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comentario> comentarios;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -28,11 +34,14 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String nombreCompleto, Boolean enabled, String contrasenia) {
+    public Usuario(Long idUsuario, String nombreCompleto, String contrasenia, Boolean enabled, List<Proyecto> proyectos, List<Comentario> comentarios, List<Rol> roles) {
         this.idUsuario = idUsuario;
         this.nombreCompleto = nombreCompleto;
-        this.enabled = enabled;
         this.contrasenia = contrasenia;
+        this.enabled = enabled;
+        this.proyectos = proyectos;
+        this.comentarios = comentarios;
+        this.roles = roles;
     }
 
     public Long getIdUsuario() {
@@ -67,11 +76,27 @@ public class Usuario {
         this.enabled = enabled;
     }
 
+    public List<Proyecto> getProyectos() {
+        return proyectos;
+    }
+
+    public void setProyectos(List<Proyecto> proyectos) {
+        this.proyectos = proyectos;
+    }
+
     public List<Rol> getRoles() {
         return roles;
     }
 
     public void setRoles(List<Rol> roles) {
         this.roles = roles;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }

@@ -2,6 +2,7 @@ package pe.edu.upc.si62_grupo_01.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.si62_grupo_01.dtos.ComentarioCountDTO;
 import pe.edu.upc.si62_grupo_01.entities.Comentario;
 import pe.edu.upc.si62_grupo_01.repositories.IComentarioRepository;
 import pe.edu.upc.si62_grupo_01.servicesinterfaces.IComentarioService;
@@ -32,5 +33,10 @@ public class ComentarioServiceImplement implements IComentarioService {
     @Override
     public void delete(int id) {
         comentarioRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ComentarioCountDTO> contarComentariosPorUsuario(Long idUsuario) {
+        return comentarioRepository.contarComentariosPorUsuario(idUsuario);
     }
 }
