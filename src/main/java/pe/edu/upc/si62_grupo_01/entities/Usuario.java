@@ -20,8 +20,9 @@ public class Usuario {
 
     private Boolean enabled;
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuarioProyecto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Proyecto> proyectos;
+
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comentario> comentarios;
