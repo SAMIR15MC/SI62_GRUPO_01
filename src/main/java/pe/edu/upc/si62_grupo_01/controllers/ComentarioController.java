@@ -47,7 +47,7 @@ public class ComentarioController {
         comentarioService.delete(id);
     }
 
-    @GetMapping("/contar-por-usuario/{idUsuario}")
+    @GetMapping("/contarcomentarios/{idUsuario}")
     public List<ComentarioCountDTO> contarComentariosPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
         return comentarioService.contarComentariosPorUsuario(idUsuario);
     }

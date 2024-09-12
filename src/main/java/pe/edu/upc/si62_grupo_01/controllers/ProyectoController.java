@@ -41,7 +41,7 @@ public class ProyectoController {
         proyectoService.delete(id);
     }
 
-    @GetMapping("/contar-por-usuario/{idUsuario}")
+    @GetMapping("/contarproyectos/{idUsuario}")
     public List<ProyectoCountDTO> contarProyectosPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
         return proyectoService.contarProyectosPorUsuario(idUsuario);
     }
