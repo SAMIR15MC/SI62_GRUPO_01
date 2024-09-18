@@ -9,4 +9,5 @@ public interface IUsuarioService {
     public void insert(Usuario usuario);
     public void delete(Long id);  // Cambiado de int a Long
     public void update(Usuario usuario);
+    public List<String[]>ListarProyectosEstado();
 }

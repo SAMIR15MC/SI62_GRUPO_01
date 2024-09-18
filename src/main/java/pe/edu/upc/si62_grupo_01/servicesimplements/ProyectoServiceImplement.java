@@ -38,4 +38,15 @@ public class ProyectoServiceImplement implements IProyectoService {
     public List<ProyectoCountDTO> contarProyectosPorUsuario(Long idUsuario) {
         return pR.contarProyectosPorUsuario(idUsuario);
     }
+
+    @Override
+    public List<String[]> contarPermisosDeProyectosPorUsuario(Long idUsuario) {
+        return pR.permisosPorProyecto_Usuario(idUsuario);
+    }
+
+    @Override
+    public List<String[]> contarPermisosDeProyectos() {
+        return pR.permisosPorProyecto();
+    }
+
 }

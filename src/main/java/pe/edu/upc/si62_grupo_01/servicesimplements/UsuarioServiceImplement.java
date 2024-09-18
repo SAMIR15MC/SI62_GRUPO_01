@@ -33,4 +33,11 @@ public class UsuarioServiceImplement implements IUsuarioService {
     public void update(Usuario usuario) {
         uR.save(usuario);
     }
+
+    @Override
+    public List<String[]> ListarProyectosEstado() {
+        return uR.ListarPoryectosEstados();
+    }
+
+
 }

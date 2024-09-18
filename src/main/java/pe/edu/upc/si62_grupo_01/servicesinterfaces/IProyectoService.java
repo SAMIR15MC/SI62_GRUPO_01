@@ -11,5 +11,6 @@ public interface IProyectoService {
     public void delete(int id);
     public void update(Proyecto proyecto);
     public List<ProyectoCountDTO> contarProyectosPorUsuario(Long idUsuario);
-
+    public List<String[]>contarPermisosDeProyectosPorUsuario(Long idUsuario);
+    public List<String[]>contarPermisosDeProyectos();
 }

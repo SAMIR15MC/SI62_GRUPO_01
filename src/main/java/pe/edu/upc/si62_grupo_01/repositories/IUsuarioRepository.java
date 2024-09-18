@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pe.edu.upc.si62_grupo_01.entities.Usuario;
 
+import java.util.List;
+
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
 
@@ -23,4 +25,11 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
     @Modifying
     @Query(value = "INSERT INTO roles (nombre_rol, user_id) VALUES (:nombreRol, :userId)", nativeQuery = true)
     public void insRol(@Param("nombreRol") String nombreRol, @Param("userId") Long userId);
+
+    @Query(value = "SELECT u.id_usuario, u.nombre_completo, u.email, p.estado_proyecto\n" +
+            "FROM Usuario u\n" +
+            "LEFT JOIN Proyecto p ON u.id_usuario = p.id_usuario\n" +
+            "GROUP BY u.id_usuario, u.nombre_completo, u.email, p.estado_proyecto\n" +
+            "ORDER BY p.estado_proyecto, u.id_usuario;", nativeQuery = true)
+    public List<String[]> ListarPoryectosEstados();
 }
